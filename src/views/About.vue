@@ -5,14 +5,17 @@
   </div>
 </template>
 
-<script>
+
+<script lang="ts">
+import {
+  defineComponent,
+  onMounted,
+} from "vue";
 import axios from 'axios'
-export default {
-  mounted () {
-    this.getData()
-  },
-  methods: {
-    getData(){
+export default defineComponent({
+  name: "about",
+  setup() {
+    const getData = ()=>{
       axios.get('/api/mock')
         .then(function (response) {
           console.log(response);
@@ -21,6 +24,13 @@ export default {
           console.log(error);
         });
     }
+
+    onMounted(() => {
+      getData()
+    });
+
+    // expose to template
+    return {};
   }
-}
+});
 </script>
